@@ -751,5 +751,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameInput: {fileID: 762447134}
-  moveSpeed: 10
-  rotateSpeed: 10
+  moveSpeed: 7
+  rotateSpeed: 7
