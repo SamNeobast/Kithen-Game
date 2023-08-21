@@ -1,19 +1,30 @@
+using System;
 using UnityEngine;
 
 public class GameInput : MonoBehaviour
 {
-    private PlayerInputActions playerInputActions;
+    public Action OnInteractActionE;
+
+    private PlayerInputActions playerInputAction;
 
     private void Awake()
     {
-        playerInputActions = new PlayerInputActions();
-        playerInputActions.Player.Enable();
-    }
-    public Vector2 GetMovedVectorNormalized()
-    {
-        Vector2 inputVector = playerInputActions.Player.Move.ReadValue<Vector2>();
+        playerInputAction = new PlayerInputActions();
+        playerInputAction.Player.Enable();
 
-        inputVector = inputVector.normalized;//Робить щоб при зажиманні W i D або інших клавіш не було пришвидшення
+        playerInputAction.Player.Interacts.performed += Interacts_performed;
+        
+    }
+
+    private void Interacts_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
+    {
+        OnInteractActionE?.Invoke();
+    }
+
+    public Vector2 GetNormalizedMove()
+    {
+        Vector2 inputVector = playerInputAction.Player.Move.ReadValue<Vector2>();
+        inputVector = inputVector.normalized;
 
         return inputVector;
     }

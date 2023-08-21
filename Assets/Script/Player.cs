@@ -1,81 +1,93 @@
+using JetBrains.Annotations;
 using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    [SerializeField] public float moveSpeed = 10f;
-    private bool isWalking = false;
-
     [SerializeField] private GameInput gameInput;
+    [SerializeField] float moveSpeed = 10f;
+    [SerializeField] float rotateSpeed = 10f;
+    [SerializeField] LayerMask layerCounter;
+
+    private bool isWalking = false;
+    private Vector3 lastMoveDir;
+    private ClearCounter selectedCounter;
+
+    private void Start()
+    {
+        gameInput.OnInteractActionE += HandleInteraction;
+    }
 
     private void Update()
     {
-        Move();
+        HandleMovement();
     }
 
-    private void Move()
+    private void HandleInteraction()
     {
-        Vector2 inputVector = gameInput.GetMovedVectorNormalized();
+        Vector2 inputVector = gameInput.GetNormalizedMove();
 
         Vector3 moveDir = new Vector3(inputVector.x, 0, inputVector.y);
-        
+
+        if (moveDir != Vector3.zero)
+        {
+            lastMoveDir = moveDir;
+        }
+
+        float interactDistance = 2f;
+
+        if (Physics.Raycast(transform.position, lastMoveDir, out RaycastHit raycastHit, interactDistance, layerCounter))
+        {
+            if (raycastHit.transform.TryGetComponent<ClearCounter>(out ClearCounter clearCounter))
+            {
+                clearCounter.Interact();
+            }
+        }
+    }
+    private void HandleMovement()
+    {
+        Vector2 inputVector = gameInput.GetNormalizedMove();
+
+        Vector3 moveDir = new Vector3(inputVector.x, 0, inputVector.y);
 
         float moveDistance = moveSpeed * Time.deltaTime;
-        float playerRadius = 0.7f;
-        float playerHeight = 2f;
-        bool canMove = !Physics.CapsuleCast(transform.position, transform.position + Vector3.up * playerHeight,
-            playerRadius, moveDir, moveDistance);
+        float hightPlayer = 2f;
+        float radiusPlayer = 0.7f;
+        bool canMove = !Physics.CapsuleCast(transform.position, transform.position + Vector3.up * hightPlayer,
+            radiusPlayer, moveDir, moveDistance);
 
         if (!canMove)
         {
-            //Не може рухатись по moveDir
-
-
-
-            //Спроба руху по Х
             Vector3 moveDirX = new Vector3(moveDir.x, 0, 0).normalized;
-            canMove = !Physics.CapsuleCast(transform.position, transform.position + Vector3.up * playerHeight,
-           playerRadius, moveDirX, moveDistance);
+            canMove = !Physics.CapsuleCast(transform.position, transform.position + Vector3.up * hightPlayer,
+                radiusPlayer, moveDirX, moveDistance);
             if (canMove)
             {
-                //Може рухатись по X
                 moveDir = moveDirX;
             }
             else
-        {
-                //Не може рухатись по Х
-
-
-                //Спроба по Z
-            Vector3 moveDirZ = new Vector3(0, 0, moveDir.z).normalized;
-            canMove = !Physics.CapsuleCast(transform.position, transform.position + Vector3.up * playerHeight,
-           playerRadius, moveDirZ, moveDistance);
-            if (canMove)
             {
-                    //Може рухатись по Z
-                moveDir = moveDirZ;
-            }else
+                Vector3 moveDirZ = new Vector3(0, 0, moveDir.z).normalized;
+                canMove = !Physics.CapsuleCast(transform.position, transform.position + Vector3.up * hightPlayer,
+                    radiusPlayer, moveDirZ, moveDistance);
+                if (canMove)
                 {
-                    //Не може рухатись в дані напрямки
+                    moveDir = moveDirZ;
                 }
+
+            }
         }
-        }
-        
+
         if (canMove)
         {
-            transform.position += moveDir * moveSpeed * Time.deltaTime;
+            transform.position += moveDir * moveDistance;
         }
-        IsWalking();
+
         isWalking = moveDir != Vector3.zero;
 
-        float rotateSpeed = 10f;
-        transform.forward = Vector3.Slerp(transform.forward, moveDir, Time.deltaTime * rotateSpeed);//Поворот в сторону напрямку
-
+        transform.forward = Vector3.Slerp(transform.forward, moveDir, rotateSpeed * Time.deltaTime);
     }
-
     public bool IsWalking()
     {
         return isWalking;
     }
-
-
 }
