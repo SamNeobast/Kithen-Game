@@ -640,10 +640,20 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2547025407520846701, guid: 00724943a908a9a4dbd830b045b8501f,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3337774753847097114, guid: 00724943a908a9a4dbd830b045b8501f,
         type: 3}
       propertyPath: m_Name
       value: ClearCounter (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5771467782973762027, guid: 00724943a908a9a4dbd830b045b8501f,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -743,6 +753,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2751555126467216402, guid: 00724943a908a9a4dbd830b045b8501f,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3337774753847097114, guid: 00724943a908a9a4dbd830b045b8501f,
         type: 3}
       propertyPath: m_Name
@@ -826,6 +841,11 @@ PrefabInstance:
       propertyPath: gameInput
       value: 
       objectReference: {fileID: 762447134}
+    - target: {fileID: 6599553850634473643, guid: 48d13a1533b6df24cbc30d9b4988943e,
+        type: 3}
+      propertyPath: moveSpeed
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 6599553850634473643, guid: 48d13a1533b6df24cbc30d9b4988943e,
         type: 3}
       propertyPath: layerCounter.m_Bits

@@ -10,11 +10,16 @@ public class Player : MonoBehaviour
 
     private bool isWalking = false;
     private Vector3 lastMoveDir;
+    private ClearCounter selectedCounter;
+
+    private void Start()
+    {
+        gameInput.OnInteractActionE += HandleInteraction;
+    }
 
     private void Update()
     {
         HandleMovement();
-        HandleInteraction();
     }
 
     private void HandleInteraction()
@@ -38,51 +43,51 @@ public class Player : MonoBehaviour
             }
         }
     }
-        private void HandleMovement()
+    private void HandleMovement()
+    {
+        Vector2 inputVector = gameInput.GetNormalizedMove();
+
+        Vector3 moveDir = new Vector3(inputVector.x, 0, inputVector.y);
+
+        float moveDistance = moveSpeed * Time.deltaTime;
+        float hightPlayer = 2f;
+        float radiusPlayer = 0.7f;
+        bool canMove = !Physics.CapsuleCast(transform.position, transform.position + Vector3.up * hightPlayer,
+            radiusPlayer, moveDir, moveDistance);
+
+        if (!canMove)
         {
-            Vector2 inputVector = gameInput.GetNormalizedMove();
-
-            Vector3 moveDir = new Vector3(inputVector.x, 0, inputVector.y);
-
-            float moveDistance = moveSpeed * Time.deltaTime;
-            float hightPlayer = 2f;
-            float radiusPlayer = 0.7f;
-            bool canMove = !Physics.CapsuleCast(transform.position, transform.position + Vector3.up * hightPlayer,
-                radiusPlayer, moveDir, moveDistance);
-
-            if (!canMove)
-            {
-                Vector3 moveDirX = new Vector3(moveDir.x, 0, 0).normalized;
-                canMove = !Physics.CapsuleCast(transform.position, transform.position + Vector3.up * hightPlayer,
-                    radiusPlayer, moveDirX, moveDistance);
-                if (canMove)
-                {
-                    moveDir = moveDirX;
-                }
-                else
-                {
-                    Vector3 moveDirZ = new Vector3(0, 0, moveDir.z).normalized;
-                    canMove = !Physics.CapsuleCast(transform.position, transform.position + Vector3.up * hightPlayer,
-                        radiusPlayer, moveDirZ, moveDistance);
-                    if (canMove)
-                    {
-                        moveDir = moveDirZ;
-                    }
-
-                }
-            }
-
+            Vector3 moveDirX = new Vector3(moveDir.x, 0, 0).normalized;
+            canMove = !Physics.CapsuleCast(transform.position, transform.position + Vector3.up * hightPlayer,
+                radiusPlayer, moveDirX, moveDistance);
             if (canMove)
             {
-                transform.position += moveDir * moveDistance;
+                moveDir = moveDirX;
             }
+            else
+            {
+                Vector3 moveDirZ = new Vector3(0, 0, moveDir.z).normalized;
+                canMove = !Physics.CapsuleCast(transform.position, transform.position + Vector3.up * hightPlayer,
+                    radiusPlayer, moveDirZ, moveDistance);
+                if (canMove)
+                {
+                    moveDir = moveDirZ;
+                }
 
-            isWalking = moveDir != Vector3.zero;
-
-            transform.forward = Vector3.Slerp(transform.forward, moveDir, rotateSpeed * Time.deltaTime);
+            }
         }
-        public bool IsWalking()
+
+        if (canMove)
         {
-            return isWalking;
+            transform.position += moveDir * moveDistance;
         }
+
+        isWalking = moveDir != Vector3.zero;
+
+        transform.forward = Vector3.Slerp(transform.forward, moveDir, rotateSpeed * Time.deltaTime);
     }
+    public bool IsWalking()
+    {
+        return isWalking;
+    }
+}
