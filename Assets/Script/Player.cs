@@ -1,8 +1,10 @@
-using JetBrains.Annotations;
+using System;
 using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    public static event Action<ClearCounter> OnSelectedCounterChanged;
+
     [SerializeField] private GameInput gameInput;
     [SerializeField] float moveSpeed = 10f;
     [SerializeField] float rotateSpeed = 10f;
@@ -14,12 +16,18 @@ public class Player : MonoBehaviour
 
     private void Start()
     {
-        gameInput.OnInteractActionE += HandleInteraction;
+        gameInput.OnInteractActionE += OnInteractActions;
     }
 
     private void Update()
     {
         HandleMovement();
+        HandleInteraction();
+    }
+
+    private void OnInteractActions()
+    {
+        selectedCounter?.Interact();
     }
 
     private void HandleInteraction()
@@ -39,9 +47,18 @@ public class Player : MonoBehaviour
         {
             if (raycastHit.transform.TryGetComponent<ClearCounter>(out ClearCounter clearCounter))
             {
-                clearCounter.Interact();
+                SelectedCounterIs(clearCounter);
+            }
+            else
+            {
+                SelectedCounterIs(null);
             }
         }
+        else
+        {
+            SelectedCounterIs(null);
+        }
+
     }
     private void HandleMovement()
     {
@@ -52,14 +69,13 @@ public class Player : MonoBehaviour
         float moveDistance = moveSpeed * Time.deltaTime;
         float hightPlayer = 2f;
         float radiusPlayer = 0.7f;
-        bool canMove = !Physics.CapsuleCast(transform.position, transform.position + Vector3.up * hightPlayer,
-            radiusPlayer, moveDir, moveDistance);
+        Vector3 topOfThePlayer = transform.position + Vector3.up * hightPlayer;
+        bool canMove = !Physics.CapsuleCast(transform.position, topOfThePlayer, radiusPlayer, moveDir, moveDistance);
 
         if (!canMove)
         {
             Vector3 moveDirX = new Vector3(moveDir.x, 0, 0).normalized;
-            canMove = !Physics.CapsuleCast(transform.position, transform.position + Vector3.up * hightPlayer,
-                radiusPlayer, moveDirX, moveDistance);
+            canMove = !Physics.CapsuleCast(transform.position, topOfThePlayer, radiusPlayer, moveDirX, moveDistance);
             if (canMove)
             {
                 moveDir = moveDirX;
@@ -67,8 +83,7 @@ public class Player : MonoBehaviour
             else
             {
                 Vector3 moveDirZ = new Vector3(0, 0, moveDir.z).normalized;
-                canMove = !Physics.CapsuleCast(transform.position, transform.position + Vector3.up * hightPlayer,
-                    radiusPlayer, moveDirZ, moveDistance);
+                canMove = !Physics.CapsuleCast(transform.position, topOfThePlayer, radiusPlayer, moveDirZ, moveDistance);
                 if (canMove)
                 {
                     moveDir = moveDirZ;
@@ -86,6 +101,15 @@ public class Player : MonoBehaviour
 
         transform.forward = Vector3.Slerp(transform.forward, moveDir, rotateSpeed * Time.deltaTime);
     }
+
+    private void SelectedCounterIs(ClearCounter selectedCounter)
+    {
+        this.selectedCounter = selectedCounter;
+        OnSelectedCounterChanged?.Invoke(selectedCounter);
+
+    }
+
+
     public bool IsWalking()
     {
         return isWalking;

@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class GameInput : MonoBehaviour
 {
-    public Action OnInteractActionE;
+    public event Action OnInteractActionE;
 
     private PlayerInputActions playerInputAction;
 
