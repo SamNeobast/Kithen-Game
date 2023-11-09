@@ -1,37 +1,22 @@
 using UnityEngine;
 
-public class ClearCounter : MonoBehaviour
+public class ClearCounter : MonoBehaviour, IKithenObjectParent
 {
     [SerializeField] private Transform topKithenPoint;
     [SerializeField] private KithenObjectSO kithenObjectSO;
-    [SerializeField] private ClearCounter secondClearCounter;
-
-    [SerializeField] private bool testing;
 
     private KithenObject kithenObject;
 
-    private void Update()
-    {
-        if (testing && Input.GetKeyDown(KeyCode.T))
-        {
-            if (kithenObject != null)
-            {
-                kithenObject.SetClearCounter(secondClearCounter);
-            }
-        }
-
-    }
-
-    public void Interact()
+    public void Interact(Player player)
     {
         if (kithenObject == null)
         {
             Transform kithenObjectTransform = Instantiate(kithenObjectSO.prefab, topKithenPoint);
-            kithenObjectTransform.GetComponent<KithenObject>().SetClearCounter(this);
+            kithenObjectTransform.GetComponent<KithenObject>().SetKithenObjectParent(this);
         }
         else
         {
-            Debug.Log(kithenObject.GetClearCounter());
+            kithenObject.SetKithenObjectParent(player);
         }
     }
 
@@ -40,23 +25,24 @@ public class ClearCounter : MonoBehaviour
         return topKithenPoint;
     }
 
-    public void SetKithenObject(KithenObject kithenObject)
+    public void SetKithenObjectParent(KithenObject kithenObject)
     {
         this.kithenObject = kithenObject;
     }
 
-    public KithenObject GetKithenObject()
+    public KithenObject GetKithenObjectParent()
     {
         return kithenObject;
     }
 
-    public void ClearKithenObject()
+    public void ClearKithenObjectParent()
     {
         kithenObject = null;
     }
 
-    public bool HasKithenObject()
+    public bool HasKithenObjectParent()
     {
         return kithenObject != null;
     }
+
 }

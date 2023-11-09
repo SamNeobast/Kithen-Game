@@ -4,31 +4,31 @@ public class KithenObject : MonoBehaviour
 {
     [SerializeField] private KithenObjectSO kithenObjectSO;
 
-    private ClearCounter clearCounter;
+    private IKithenObjectParent kithenObjectParent;
 
-    public void SetClearCounter(ClearCounter newClearCounter)
+    public void SetKithenObjectParent(IKithenObjectParent kithenObjectParent)
     {
-        if (clearCounter != null)
+        if (this.kithenObjectParent != null)
         {
-            clearCounter.ClearKithenObject();
+            this.kithenObjectParent.ClearKithenObjectParent();
         }
 
-        clearCounter = newClearCounter;
+        this.kithenObjectParent = kithenObjectParent;
 
-        if (clearCounter.HasKithenObject())
+        if (this.kithenObjectParent.HasKithenObjectParent())
         {
-            Debug.LogError("Counter already has object");
+            Debug.LogError("KithenObjectParent already has object");
         }
       
-        clearCounter.SetKithenObject(this);
+        this.kithenObjectParent.SetKithenObjectParent(this);
 
-        transform.parent = clearCounter.GetTopKithenPointFollowTransform();
+        transform.parent = this.kithenObjectParent.GetTopKithenPointFollowTransform();
         transform.localPosition = Vector3.zero;
     }
 
-    public ClearCounter GetClearCounter()
+    public IKithenObjectParent GetKithenObjectParent()
     {
-        return clearCounter;
+        return kithenObjectParent;
     }
 
     public KithenObjectSO GetKithenObjectSO() { return kithenObjectSO; }

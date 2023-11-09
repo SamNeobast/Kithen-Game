@@ -800,11 +800,6 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 173000510641789742, guid: 48d13a1533b6df24cbc30d9b4988943e,
         type: 3}
-      propertyPath: m_RootOrder
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 173000510641789742, guid: 48d13a1533b6df24cbc30d9b4988943e,
-        type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
@@ -863,16 +858,6 @@ PrefabInstance:
       propertyPath: gameInput
       value: 
       objectReference: {fileID: 762447134}
-    - target: {fileID: 6599553850634473643, guid: 48d13a1533b6df24cbc30d9b4988943e,
-        type: 3}
-      propertyPath: moveSpeed
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 6599553850634473643, guid: 48d13a1533b6df24cbc30d9b4988943e,
-        type: 3}
-      propertyPath: layerCounter.m_Bits
-      value: 64
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

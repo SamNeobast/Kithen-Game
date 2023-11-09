@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class Player : MonoBehaviour
+public class Player : MonoBehaviour, IKithenObjectParent
 {
     public static event Action<ClearCounter> OnSelectedCounterChanged;
 
@@ -9,10 +9,14 @@ public class Player : MonoBehaviour
     [SerializeField] float moveSpeed = 10f;
     [SerializeField] float rotateSpeed = 10f;
     [SerializeField] LayerMask layerCounter;
+    [SerializeField] private Transform kithenObjectHoldPoint;
+
 
     private bool isWalking = false;
     private Vector3 lastMoveDir;
     private ClearCounter selectedCounter;
+    private KithenObject kithenObject;
+
 
     private void Start()
     {
@@ -27,7 +31,7 @@ public class Player : MonoBehaviour
 
     private void OnInteractActions()
     {
-        selectedCounter?.Interact();
+        selectedCounter?.Interact(this);
     }
 
     private void HandleInteraction()
@@ -113,5 +117,31 @@ public class Player : MonoBehaviour
     public bool IsWalking()
     {
         return isWalking;
+    }
+
+
+    public Transform GetTopKithenPointFollowTransform()
+    {
+        return kithenObjectHoldPoint;
+    }
+
+    public void SetKithenObjectParent(KithenObject kithenObject)
+    {
+        this.kithenObject = kithenObject;
+    }
+
+    public KithenObject GetKithenObjectParent()
+    {
+        return kithenObject;
+    }
+
+    public void ClearKithenObjectParent()
+    {
+        kithenObject = null;
+    }
+
+    public bool HasKithenObjectParent()
+    {
+        return kithenObject != null;
     }
 }
