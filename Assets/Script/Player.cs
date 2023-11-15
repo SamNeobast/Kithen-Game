@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class Player : MonoBehaviour, IKithenObjectParent
 {
-    public static event Action<ClearCounter> OnSelectedCounterChanged;
+    public static event Action<BaseCounter> OnSelectedCounterChanged;
 
     [SerializeField] private GameInput gameInput;
     [SerializeField] float moveSpeed = 10f;
@@ -14,7 +14,7 @@ public class Player : MonoBehaviour, IKithenObjectParent
 
     private bool isWalking = false;
     private Vector3 lastMoveDir;
-    private ClearCounter selectedCounter;
+    private BaseCounter selectedCounter;
     private KithenObject kithenObject;
 
 
@@ -49,9 +49,9 @@ public class Player : MonoBehaviour, IKithenObjectParent
 
         if (Physics.Raycast(transform.position, lastMoveDir, out RaycastHit raycastHit, interactDistance, layerCounter))
         {
-            if (raycastHit.transform.TryGetComponent<ClearCounter>(out ClearCounter clearCounter))
+            if (raycastHit.transform.TryGetComponent<BaseCounter>(out BaseCounter baseCounter))
             {
-                SelectedCounterIs(clearCounter);
+                SelectedCounterIs(baseCounter);
             }
             else
             {
@@ -106,7 +106,7 @@ public class Player : MonoBehaviour, IKithenObjectParent
         transform.forward = Vector3.Slerp(transform.forward, moveDir, rotateSpeed * Time.deltaTime);
     }
 
-    private void SelectedCounterIs(ClearCounter selectedCounter)
+    private void SelectedCounterIs(BaseCounter selectedCounter)
     {
         this.selectedCounter = selectedCounter;
         OnSelectedCounterChanged?.Invoke(selectedCounter);
