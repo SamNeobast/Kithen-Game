@@ -6,7 +6,7 @@ public interface IKithenObjectParent
 
     public void SetKithenObjectParent(KithenObject kithenObject);
 
-    public KithenObject GetKithenObjectParent();
+    public KithenObject GetKithenObject();
 
     public void ClearKithenObjectParent();
 

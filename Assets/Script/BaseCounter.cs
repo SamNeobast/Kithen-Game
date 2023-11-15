@@ -22,7 +22,7 @@ public class BaseCounter : MonoBehaviour, IKithenObjectParent
         this.kithenObject = kithenObject;
     }
 
-    public KithenObject GetKithenObjectParent()
+    public KithenObject GetKithenObject()
     {
         return kithenObject;
     }

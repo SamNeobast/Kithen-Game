@@ -7,7 +7,21 @@ public class ClearCounter : BaseCounter
 
     public override void Interact(Player player)
     {
-        
+        if (!HasKithenObjectParent())
+        {
+            
+            if (player.HasKithenObjectParent())
+            {
+                player.GetKithenObject().SetKithenObjectParent(this);
+            }
+        }
+        else
+        {
+            if (!player.HasKithenObjectParent())
+            {
+                GetKithenObject().SetKithenObjectParent(player);
+            }
+        }
     }
 
 

@@ -130,7 +130,7 @@ public class Player : MonoBehaviour, IKithenObjectParent
         this.kithenObject = kithenObject;
     }
 
-    public KithenObject GetKithenObjectParent()
+    public KithenObject GetKithenObject()
     {
         return kithenObject;
     }
