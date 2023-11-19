@@ -801,6 +801,29 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: 0a002e41e6ba0054ba420c224ae5623f,
         type: 2}
+    - target: {fileID: 5662603450250598388, guid: 00a8116a15b1af34b862650b603fe991,
+        type: 3}
+      propertyPath: cutKithenObjectSOArray.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5662603450250598388, guid: 00a8116a15b1af34b862650b603fe991,
+        type: 3}
+      propertyPath: cutKithenObjectSOArray.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 233e995d8509b414e9d1c7eb9dfbf2d9,
+        type: 2}
+    - target: {fileID: 5662603450250598388, guid: 00a8116a15b1af34b862650b603fe991,
+        type: 3}
+      propertyPath: cutKithenObjectSOArray.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: c0d8513eb4c9816499e008f499af90db,
+        type: 2}
+    - target: {fileID: 5662603450250598388, guid: 00a8116a15b1af34b862650b603fe991,
+        type: 3}
+      propertyPath: cutKithenObjectSOArray.Array.data[2]
+      value: 
+      objectReference: {fileID: 11400000, guid: f9e5ff9f6c0086c42803fef9ffc147d9,
+        type: 2}
     - target: {fileID: 7326015810094785561, guid: 00a8116a15b1af34b862650b603fe991,
         type: 3}
       propertyPath: m_Name
