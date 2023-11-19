@@ -10,5 +10,5 @@ public interface IKithenObjectParent
 
     public void ClearKithenObjectParent();
 
-    public bool HasKithenObjectParent();
+    public bool HasKithenObject();
 }

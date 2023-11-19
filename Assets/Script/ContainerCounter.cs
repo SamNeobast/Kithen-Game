@@ -10,10 +10,10 @@ public class ContainerCounter : BaseCounter
 
     public override void Interact(Player player)
     {
-        if (!player.HasKithenObjectParent())
+        if (!player.HasKithenObject())
         {
-            Transform kithenObjectTransform = Instantiate(kithenObjectSO.prefab);
-            kithenObjectTransform.GetComponent<KithenObject>().SetKithenObjectParent(player);
+            KithenObject.SpawnKithenObject(kithenObjectSO, player);
+
             OnPlayerGrabbedObject?.Invoke();
         }
     }

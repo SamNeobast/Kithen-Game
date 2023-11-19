@@ -21,18 +21,26 @@ public class Player : MonoBehaviour, IKithenObjectParent
     private void Start()
     {
         gameInput.OnInteractActionE += OnInteractActions;
+        gameInput.OnInteractActionF += GameInput_OnInteractActionAlternative;
     }
+
 
     private void Update()
     {
         HandleMovement();
         HandleInteraction();
     }
+    private void GameInput_OnInteractActionAlternative()
+    {
+        selectedCounter?.InteractAlternative(this);
+    }
 
     private void OnInteractActions()
     {
         selectedCounter?.Interact(this);
     }
+
+
 
     private void HandleInteraction()
     {
@@ -74,12 +82,14 @@ public class Player : MonoBehaviour, IKithenObjectParent
         float hightPlayer = 2f;
         float radiusPlayer = 0.7f;
         Vector3 topOfThePlayer = transform.position + Vector3.up * hightPlayer;
-        bool canMove = !Physics.CapsuleCast(transform.position, topOfThePlayer, radiusPlayer, moveDir, moveDistance);
+        bool canMove = !Physics.CapsuleCast(transform.position, topOfThePlayer,
+            radiusPlayer, moveDir, moveDistance);
 
         if (!canMove)
         {
             Vector3 moveDirX = new Vector3(moveDir.x, 0, 0).normalized;
-            canMove = !Physics.CapsuleCast(transform.position, topOfThePlayer, radiusPlayer, moveDirX, moveDistance);
+            canMove = moveDir.x != 0 && !Physics.CapsuleCast(transform.position,
+                topOfThePlayer, radiusPlayer, moveDirX, moveDistance);
             if (canMove)
             {
                 moveDir = moveDirX;
@@ -87,7 +97,8 @@ public class Player : MonoBehaviour, IKithenObjectParent
             else
             {
                 Vector3 moveDirZ = new Vector3(0, 0, moveDir.z).normalized;
-                canMove = !Physics.CapsuleCast(transform.position, topOfThePlayer, radiusPlayer, moveDirZ, moveDistance);
+                canMove = moveDir.z != 0 && !Physics.CapsuleCast(transform.position, topOfThePlayer,
+                    radiusPlayer, moveDirZ, moveDistance);
                 if (canMove)
                 {
                     moveDir = moveDirZ;
@@ -140,7 +151,7 @@ public class Player : MonoBehaviour, IKithenObjectParent
         kithenObject = null;
     }
 
-    public bool HasKithenObjectParent()
+    public bool HasKithenObject()
     {
         return kithenObject != null;
     }

@@ -15,7 +15,7 @@ public class KithenObject : MonoBehaviour
 
         this.kithenObjectParent = kithenObjectParent;
 
-        if (this.kithenObjectParent.HasKithenObjectParent())
+        if (this.kithenObjectParent.HasKithenObject())
         {
             Debug.LogError("KithenObjectParent already has object");
         }
@@ -32,4 +32,24 @@ public class KithenObject : MonoBehaviour
     }
 
     public KithenObjectSO GetKithenObjectSO() { return kithenObjectSO; }
+
+    public void DestroySelf()
+    {
+        kithenObjectParent.ClearKithenObjectParent();
+        Destroy(gameObject);
+    }
+
+
+
+    public static KithenObject SpawnKithenObject(KithenObjectSO kithenObjectSO,
+        IKithenObjectParent kithenObjectParent)
+    {
+        Transform kithenObjectTransform = Instantiate(kithenObjectSO.prefab);
+
+        KithenObject kithenObject = kithenObjectTransform.GetComponent<KithenObject>();
+
+        kithenObject.SetKithenObjectParent(kithenObjectParent);
+
+        return kithenObject;
+    }
 }

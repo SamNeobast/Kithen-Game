@@ -8,9 +8,13 @@ public class BaseCounter : MonoBehaviour, IKithenObjectParent
 
     public virtual void Interact(Player player)
     {
-        Debug.LogError("BaseCounter");
+        Debug.LogError("BaseCounter - Interact");
     }
 
+    public virtual void InteractAlternative(Player player)
+    {
+        Debug.LogError("BaseCounter - InteractAlternative");
+    }
 
     public Transform GetTopKithenPointFollowTransform()
     {
@@ -32,7 +36,7 @@ public class BaseCounter : MonoBehaviour, IKithenObjectParent
         kithenObject = null;
     }
 
-    public bool HasKithenObjectParent()
+    public bool HasKithenObject()
     {
         return kithenObject != null;
     }
