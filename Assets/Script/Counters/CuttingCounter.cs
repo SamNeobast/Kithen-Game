@@ -4,6 +4,7 @@ public class CuttingCounter : BaseCounter
 {
     [SerializeField] private CuttingRecipeSO[] cutKithenObjectSOArray;
 
+    private int cuttingProgress;
     public override void Interact(Player player)
     {
         if (!HasKithenObject())
@@ -13,8 +14,8 @@ public class CuttingCounter : BaseCounter
             {
                 if (HasRecipeWithInput(player.GetKithenObject().GetKithenObjectSO()))
                 {
-
                     player.GetKithenObject().SetKithenObjectParent(this);
+                    cuttingProgress = 0;
                 }
             }
         }
@@ -31,33 +32,46 @@ public class CuttingCounter : BaseCounter
     {
         if (HasKithenObject() && HasRecipeWithInput(GetKithenObject().GetKithenObjectSO()))
         {
-            KithenObjectSO outputKithenObjectSO = GetOutputForInput(GetKithenObject().GetKithenObjectSO());
+            cuttingProgress++;
+            CuttingRecipeSO cuttingRecipeSO = GetCuttingRecipeSOWithInput(GetKithenObject().GetKithenObjectSO());
 
-            GetKithenObject().DestroySelf();
+            if (cuttingProgress >= cuttingRecipeSO.cuttingProgressCountMax)
+            {
+                KithenObjectSO outputKithenObjectSO = GetOutputForInput(GetKithenObject().GetKithenObjectSO());
 
-            KithenObject.SpawnKithenObject(outputKithenObjectSO, this);
+                GetKithenObject().DestroySelf();
+
+                KithenObject.SpawnKithenObject(outputKithenObjectSO, this);
+            }
         }
     }
 
     private bool HasRecipeWithInput(KithenObjectSO inputKithenObjectSO)
     {
-        foreach (CuttingRecipeSO cuttingRecipeSO in cutKithenObjectSOArray)
-        {
-            if (cuttingRecipeSO.input == inputKithenObjectSO)
-            {
-                return true;
-            }
-        }
-        return false;
+        CuttingRecipeSO cuttingRecipeSO = GetCuttingRecipeSOWithInput(inputKithenObjectSO);
+        return cuttingRecipeSO != null;
     }
 
     private KithenObjectSO GetOutputForInput(KithenObjectSO inputKithenObjectSO)
+    {
+        CuttingRecipeSO cuttingRecipeSO = GetCuttingRecipeSOWithInput(inputKithenObjectSO);
+        if (cuttingRecipeSO != null)
+        {
+            return cuttingRecipeSO.output;
+        }               
+        else
+        {
+            return null;
+        }
+    }
+
+    private CuttingRecipeSO GetCuttingRecipeSOWithInput(KithenObjectSO inputKithenObjectSO)
     {
         foreach (CuttingRecipeSO cuttingRecipeSO in cutKithenObjectSOArray)
         {
             if (cuttingRecipeSO.input == inputKithenObjectSO)
             {
-                return cuttingRecipeSO.output;
+                return cuttingRecipeSO;
             }
         }
         return null;
