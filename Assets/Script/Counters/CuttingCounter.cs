@@ -1,7 +1,11 @@
+using System;
 using UnityEngine;
 
 public class CuttingCounter : BaseCounter
 {
+    public Action<float> OnProgressChanged;
+    public Action OnCut;
+
     [SerializeField] private CuttingRecipeSO[] cutKithenObjectSOArray;
 
     private int cuttingProgress;
@@ -16,6 +20,10 @@ public class CuttingCounter : BaseCounter
                 {
                     player.GetKithenObject().SetKithenObjectParent(this);
                     cuttingProgress = 0;
+
+                    CuttingRecipeSO cuttingRecipeSO = GetCuttingRecipeSOWithInput(GetKithenObject().GetKithenObjectSO());
+
+                    OnProgressChanged?.Invoke((float)cuttingProgress / cuttingRecipeSO.cuttingProgressCountMax);
                 }
             }
         }
@@ -34,6 +42,9 @@ public class CuttingCounter : BaseCounter
         {
             cuttingProgress++;
             CuttingRecipeSO cuttingRecipeSO = GetCuttingRecipeSOWithInput(GetKithenObject().GetKithenObjectSO());
+
+            OnCut?.Invoke();
+            OnProgressChanged?.Invoke((float)cuttingProgress / cuttingRecipeSO.cuttingProgressCountMax);
 
             if (cuttingProgress >= cuttingRecipeSO.cuttingProgressCountMax)
             {
