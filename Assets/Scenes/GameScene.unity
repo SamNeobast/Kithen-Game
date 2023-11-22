@@ -1062,6 +1062,11 @@ PrefabInstance:
       propertyPath: cuttingCounter
       value: 
       objectReference: {fileID: 1766526375}
+    - target: {fileID: 198659043868263346, guid: 00a8116a15b1af34b862650b603fe991,
+        type: 3}
+      propertyPath: counterGameObject
+      value: 
+      objectReference: {fileID: 1316421541}
     - target: {fileID: 5525364183089825494, guid: 00a8116a15b1af34b862650b603fe991,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1308,6 +1313,12 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1a51baccff72e0040a0abeda56281a15, type: 3}
+--- !u!1 &1316421541 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7326015810094785561, guid: 00a8116a15b1af34b862650b603fe991,
+    type: 3}
+  m_PrefabInstance: {fileID: 1051786768}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1376074977 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7717203429006574582, guid: 1a51baccff72e0040a0abeda56281a15,
@@ -1320,13 +1331,19 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 384757074}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1424440168 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7326015810094785561, guid: 00a8116a15b1af34b862650b603fe991,
+    type: 3}
+  m_PrefabInstance: {fileID: 1696509205}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1424440169 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5662603450250598388, guid: 00a8116a15b1af34b862650b603fe991,
     type: 3}
   m_PrefabInstance: {fileID: 1696509205}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 1424440168}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 853839a91208fe941b97ef45a861c696, type: 3}
@@ -1491,6 +1508,11 @@ PrefabInstance:
       propertyPath: cuttingCounter
       value: 
       objectReference: {fileID: 1424440169}
+    - target: {fileID: 198659043868263346, guid: 00a8116a15b1af34b862650b603fe991,
+        type: 3}
+      propertyPath: counterGameObject
+      value: 
+      objectReference: {fileID: 1424440168}
     - target: {fileID: 4521470592374568640, guid: 00a8116a15b1af34b862650b603fe991,
         type: 3}
       propertyPath: m_PresetInfoIsWorld
@@ -1704,7 +1726,7 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 1051786768}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 1316421541}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 853839a91208fe941b97ef45a861c696, type: 3}

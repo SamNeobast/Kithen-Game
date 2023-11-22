@@ -68,7 +68,8 @@ public class StoveCounter : BaseCounter, IHasProgress
 
                         state = StoveState.Burned;
                         OnStateChanged?.Invoke();
-                        OnProgressChanged?.Invoke(0f);
+                        float hideBar = 0f;
+                        OnProgressChanged?.Invoke(hideBar);
                     }
                     break;
                 case StoveState.Burned:
@@ -105,7 +106,8 @@ public class StoveCounter : BaseCounter, IHasProgress
                 GetKithenObject().SetKithenObjectParent(player);
                 state = StoveState.Idle;
                 OnStateChanged?.Invoke();
-                OnProgressChanged?.Invoke(0f);
+                float hideBar = 0f;
+                OnProgressChanged?.Invoke(hideBar);
             }
         }
     }
