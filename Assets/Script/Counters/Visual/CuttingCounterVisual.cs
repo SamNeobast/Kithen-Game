@@ -13,9 +13,14 @@ public class CuttingCounterVisual : MonoBehaviour
         containerAnimation = GetComponent<Animator>();
     }
 
-    private void Start()
+    private void OnEnable()
     {
         cuttingCounter.OnCut += StartAnimationContainer;
+
+    }
+    private void OnDisable()
+    {
+        cuttingCounter.OnCut -= StartAnimationContainer;
     }
 
     private void StartAnimationContainer()

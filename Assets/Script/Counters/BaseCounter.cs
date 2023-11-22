@@ -13,7 +13,7 @@ public class BaseCounter : MonoBehaviour, IKithenObjectParent
 
     public virtual void InteractAlternative(Player player)
     {
-        Debug.LogError("BaseCounter - InteractAlternative");
+        Debug.Log("ќбЇкт не маЇ взаЇмод≥ F");
     }
 
     public Transform GetTopKithenPointFollowTransform()

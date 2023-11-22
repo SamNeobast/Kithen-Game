@@ -17,13 +17,17 @@ public class Player : MonoBehaviour, IKithenObjectParent
     private BaseCounter selectedCounter;
     private KithenObject kithenObject;
 
-
-    private void Start()
+    private void OnEnable()
     {
         gameInput.OnInteractActionE += OnInteractActions;
         gameInput.OnInteractActionF += GameInput_OnInteractActionAlternative;
-    }
 
+    }
+    private void OnDestroy()
+    {
+        gameInput.OnInteractActionE -= OnInteractActions;
+        gameInput.OnInteractActionF -= GameInput_OnInteractActionAlternative;
+    }
 
     private void Update()
     {

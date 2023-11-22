@@ -5,8 +5,13 @@ public class SelectedCounterVisual : MonoBehaviour
     [SerializeField] private BaseCounter baseCounter;
     [SerializeField] private GameObject[] visualGameObjectArray;
 
-    private void Start()
+    private void OnEnable()
     {
+        Player.OnSelectedCounterChanged += SelectedCounter;
+    }
+    private void OnDestroy()
+    {
+
         Player.OnSelectedCounterChanged += SelectedCounter;
     }
 

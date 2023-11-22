@@ -15,9 +15,14 @@ public class ContainerCounterVisual : MonoBehaviour
         containerAnimation = GetComponent<Animator>();
     }
 
-    private void Start()
+    private void OnEnable()
     {
         containerCounter.OnPlayerGrabbedObject += StartAnimationContainer;
+
+    }
+    private void OnDisable()
+    {
+        containerCounter.OnPlayerGrabbedObject -= StartAnimationContainer;
     }
 
     private void StartAnimationContainer()

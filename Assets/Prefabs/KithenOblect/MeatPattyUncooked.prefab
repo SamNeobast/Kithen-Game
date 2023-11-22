@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4540446662958562400}
   - component: {fileID: -2807564458119502268}
   m_Layer: 0
-  m_Name: MeatUncooked
+  m_Name: MeatPattyUncooked
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -3,8 +3,9 @@ using UnityEngine;
 
 public class CuttingCounter : BaseCounter
 {
-    public Action<float> OnProgressChanged;
-    public Action OnCut;
+    public event Action<float> OnProgressChanged;
+
+    public event Action OnCut;
 
     [SerializeField] private CuttingRecipeSO[] cutKithenObjectSOArray;
 
@@ -23,7 +24,7 @@ public class CuttingCounter : BaseCounter
 
                     CuttingRecipeSO cuttingRecipeSO = GetCuttingRecipeSOWithInput(GetKithenObject().GetKithenObjectSO());
 
-                    OnProgressChanged?.Invoke((float)cuttingProgress / cuttingRecipeSO.cuttingProgressCountMax);
+                   OnProgressChanged?.Invoke((float)cuttingProgress / cuttingRecipeSO.cuttingProgressCountMax);
                 }
             }
         }
