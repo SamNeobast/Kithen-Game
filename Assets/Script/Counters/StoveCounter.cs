@@ -1,8 +1,9 @@
 using System;
 using UnityEngine;
 
-public class StoveCounter : BaseCounter
+public class StoveCounter : BaseCounter, IHasProgress
 {
+    public event Action<float> OnProgressChanged;
 
     public event Action OnStateChanged;
     public enum StoveState
@@ -39,6 +40,7 @@ public class StoveCounter : BaseCounter
                     break;
                 case StoveState.Frying:
                     fryingTimer += Time.deltaTime;
+                    OnProgressChanged?.Invoke(fryingTimer / fryingRecipeSo.fryingTimerMax);
 
                     if (fryingTimer > fryingRecipeSo.fryingTimerMax)
                     {
@@ -56,6 +58,7 @@ public class StoveCounter : BaseCounter
                     break;
                 case StoveState.Fried:
                     burningTimer += Time.deltaTime;
+                    OnProgressChanged?.Invoke(burningTimer / burningRecipeSO.burningTimerMax);
 
                     if (burningTimer > burningRecipeSO.burningTimerMax)
                     {
@@ -65,6 +68,7 @@ public class StoveCounter : BaseCounter
 
                         state = StoveState.Burned;
                         OnStateChanged?.Invoke();
+                        OnProgressChanged?.Invoke(0f);
                     }
                     break;
                 case StoveState.Burned:
@@ -90,6 +94,7 @@ public class StoveCounter : BaseCounter
                     state = StoveState.Frying;
                     OnStateChanged?.Invoke();
                     fryingTimer = 0f;
+                    OnProgressChanged?.Invoke(fryingTimer / fryingRecipeSo.fryingTimerMax);
                 }
             }
         }
@@ -100,6 +105,7 @@ public class StoveCounter : BaseCounter
                 GetKithenObject().SetKithenObjectParent(player);
                 state = StoveState.Idle;
                 OnStateChanged?.Invoke();
+                OnProgressChanged?.Invoke(0f);
             }
         }
     }

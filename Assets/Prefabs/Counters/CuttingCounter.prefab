@@ -290,6 +290,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3099877327112280776, guid: d3cf9519753f98648acb4cd2956a4d7c,
         type: 3}
+      propertyPath: counterGameObject
+      value: 
+      objectReference: {fileID: 7326015810094785561}
+    - target: {fileID: 3099877327112280776, guid: d3cf9519753f98648acb4cd2956a4d7c,
+        type: 3}
       propertyPath: hasProgressGameObject
       value: 
       objectReference: {fileID: 7326015810094785561}
