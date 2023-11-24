@@ -19,7 +19,7 @@ public class KithenObject : MonoBehaviour
         {
             Debug.LogError("KithenObjectParent already has object");
         }
-      
+
         this.kithenObjectParent.SetKithenObjectParent(this);
 
         transform.parent = this.kithenObjectParent.GetTopKithenPointFollowTransform();
@@ -39,7 +39,19 @@ public class KithenObject : MonoBehaviour
         Destroy(gameObject);
     }
 
-
+    public bool TryGetPlate(out PlateKithenObject plateKithenObject)
+    {
+        if (this is PlateKithenObject)
+        {
+            plateKithenObject = this as PlateKithenObject;
+            return true;
+        }
+        else
+        {
+            plateKithenObject = null;
+            return false;
+        }
+    }
 
     public static KithenObject SpawnKithenObject(KithenObjectSO kithenObjectSO,
         IKithenObjectParent kithenObjectParent)

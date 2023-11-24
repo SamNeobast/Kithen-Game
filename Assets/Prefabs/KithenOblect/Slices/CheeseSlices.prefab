@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4cff6e57192790e42920cb074f1c0476, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  kithenObjectSO: {fileID: 11400000, guid: 0a002e41e6ba0054ba420c224ae5623f, type: 2}
+  kithenObjectSO: {fileID: 11400000, guid: b3ed4654e95460e479e215a6e75a28a2, type: 2}
 --- !u!1001 &7919002577727402260
 PrefabInstance:
   m_ObjectHideFlags: 0

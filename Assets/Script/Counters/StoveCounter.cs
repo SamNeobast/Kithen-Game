@@ -109,6 +109,20 @@ public class StoveCounter : BaseCounter, IHasProgress
                 float hideBar = 0f;
                 OnProgressChanged?.Invoke(hideBar);
             }
+            else
+            {
+                if (player.GetKithenObject().TryGetPlate(out PlateKithenObject plateKithenObject))
+                {
+                    if (plateKithenObject.TryAddIngredient(GetKithenObject().GetKithenObjectSO()))
+                    {
+                        GetKithenObject().DestroySelf();
+                        state = StoveState.Idle;
+                        OnStateChanged?.Invoke();
+                        float hideBar = 0f;
+                        OnProgressChanged?.Invoke(hideBar);
+                    }
+                }
+            }
         }
     }
 
