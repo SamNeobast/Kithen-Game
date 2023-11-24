@@ -1,8 +1,11 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class PlateKithenObject : KithenObject
 {
+    public event Action<KithenObjectSO> OnIngredientAdded;
+
     [SerializeField] private List<KithenObjectSO> validKithenObjectSOList;
 
     private List<KithenObjectSO> kithenObjectSOList;
@@ -26,6 +29,7 @@ public class PlateKithenObject : KithenObject
         else
         {
             kithenObjectSOList.Add(kithenObjectSO);
+            OnIngredientAdded?.Invoke(kithenObjectSO);
             return true;
         }
     }
