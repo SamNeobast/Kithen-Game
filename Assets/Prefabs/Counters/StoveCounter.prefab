@@ -259,6 +259,12 @@ PrefabInstance:
       propertyPath: counterGameObject
       value: 
       objectReference: {fileID: 5739504951794249086}
+    - target: {fileID: 4177752482444600383, guid: d3cf9519753f98648acb4cd2956a4d7c,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -2413806693520163455, guid: ebe73ca9363db456bacf42c025bb4847,
+        type: 3}
     - target: {fileID: 5590894472958071081, guid: d3cf9519753f98648acb4cd2956a4d7c,
         type: 3}
       propertyPath: m_Name
@@ -269,6 +275,12 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6539704419898240484, guid: d3cf9519753f98648acb4cd2956a4d7c,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -2413806693520163455, guid: ebe73ca9363db456bacf42c025bb4847,
+        type: 3}
     - target: {fileID: 6539704419898240484, guid: d3cf9519753f98648acb4cd2956a4d7c,
         type: 3}
       propertyPath: m_Color.b

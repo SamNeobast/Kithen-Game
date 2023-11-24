@@ -34,4 +34,8 @@ public class PlateKithenObject : KithenObject
         }
     }
 
+    public List<KithenObjectSO> GetKithenObjectSOList()
+    {
+        return kithenObjectSOList;
+    }
 }
