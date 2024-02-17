@@ -15,4 +15,4 @@ MonoBehaviour:
   kithenObjectSOList:
   - {fileID: 11400000, guid: e84c30da9c7895e49b7e24d87548f769, type: 2}
   - {fileID: 11400000, guid: 0a002e41e6ba0054ba420c224ae5623f, type: 2}
-  recipeName: Cheeseburger
+  recipeName: Salad

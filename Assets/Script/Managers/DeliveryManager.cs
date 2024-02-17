@@ -1,8 +1,11 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class DeliveryManager : MonoBehaviour
 {
+    public event Action DeliverySpawned;
+    public event Action DeliveryCompleted;
 
     public static DeliveryManager Instance { get; private set; }
 
@@ -30,9 +33,10 @@ public class DeliveryManager : MonoBehaviour
             if (waitinResipeSOList.Count < waitingRecipeMax)
             {
                 RecipeSO waitingRecipeSO = recipeListSO.resipeSOList
-                    [Random.Range(0, recipeListSO.resipeSOList.Count)];
-                Debug.Log(waitingRecipeSO.recipeName);
+                    [UnityEngine.Random.Range(0, recipeListSO.resipeSOList.Count)];
+
                 waitinResipeSOList.Add(waitingRecipeSO);
+                DeliverySpawned?.Invoke();
             }
         }
 
@@ -70,13 +74,17 @@ public class DeliveryManager : MonoBehaviour
 
                 if (plateContentsMathesRecipe)
                 {
-                    Debug.Log("Player Deiver the correct recipe!");
                     waitinResipeSOList.RemoveAt(i);
+                    DeliveryCompleted?.Invoke();
                     return;
                 }
             }
         }
+    }
 
-        Debug.Log("Player did not deliver correct recipe");
+
+    public List<RecipeSO> GetWaitingRecipeSOList()
+    {
+        return waitinResipeSOList;
     }
 }

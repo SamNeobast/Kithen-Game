@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 499ddb3bb9856b64f9407b7b3281c335, type: 3}
-  m_Name: MeatPattyCooked
+  m_Name: MeatPatty
   m_EditorClassIdentifier: 
   kithenObjectSOList:
-  - {fileID: 11400000, guid: e72cab86b6acfce4ca51abd5f7a53c95, type: 2}
-  recipeName: MeatPattyCooked
+  - {fileID: 11400000, guid: d5460966093afc644a398025bea619ee, type: 2}
+  recipeName: MeatPatty
