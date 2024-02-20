@@ -3,7 +3,11 @@ using UnityEngine;
 
 public class Player : MonoBehaviour, IKithenObjectParent
 {
+
+
     public static event Action<BaseCounter> OnSelectedCounterChanged;
+    public static event Action<object> OnPickedSomething;
+
 
     [SerializeField] private GameInput gameInput;
     [SerializeField] float moveSpeed = 10f;
@@ -21,7 +25,6 @@ public class Player : MonoBehaviour, IKithenObjectParent
     {
         gameInput.OnInteractActionE += OnInteractActions;
         gameInput.OnInteractActionF += GameInput_OnInteractActionAlternative;
-
     }
     private void OnDestroy()
     {
@@ -107,7 +110,6 @@ public class Player : MonoBehaviour, IKithenObjectParent
                 {
                     moveDir = moveDirZ;
                 }
-
             }
         }
 
@@ -125,7 +127,6 @@ public class Player : MonoBehaviour, IKithenObjectParent
     {
         this.selectedCounter = selectedCounter;
         OnSelectedCounterChanged?.Invoke(selectedCounter);
-
     }
 
 
@@ -140,9 +141,14 @@ public class Player : MonoBehaviour, IKithenObjectParent
         return kithenObjectHoldPoint;
     }
 
-    public void SetKithenObjectParent(KithenObject kithenObject)
+    public void SetKithenObject(KithenObject kithenObject)
     {
         this.kithenObject = kithenObject;
+
+        if (kithenObject != null)
+        {
+            OnPickedSomething?.Invoke(this);
+        }
     }
 
     public KithenObject GetKithenObject()

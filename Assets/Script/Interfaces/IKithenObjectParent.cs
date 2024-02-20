@@ -4,7 +4,7 @@ public interface IKithenObjectParent
 {
     public Transform GetTopKithenPointFollowTransform();
 
-    public void SetKithenObjectParent(KithenObject kithenObject);
+    public void SetKithenObject(KithenObject kithenObject);
 
     public KithenObject GetKithenObject();
 

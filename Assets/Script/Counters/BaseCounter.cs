@@ -1,7 +1,10 @@
+using System;
 using UnityEngine;
 
 public class BaseCounter : MonoBehaviour, IKithenObjectParent
 {
+    public static event Action<object> OnAnyObjectPlacedHere;
+
     [SerializeField] private Transform topKithenPoint;
 
     private KithenObject kithenObject;
@@ -21,9 +24,14 @@ public class BaseCounter : MonoBehaviour, IKithenObjectParent
         return topKithenPoint;
     }
 
-    public void SetKithenObjectParent(KithenObject kithenObject)
+    public void SetKithenObject(KithenObject kithenObject)
     {
         this.kithenObject = kithenObject;
+
+        if (kithenObject != null)
+        {
+            OnAnyObjectPlacedHere(this);
+        }
     }
 
     public KithenObject GetKithenObject()

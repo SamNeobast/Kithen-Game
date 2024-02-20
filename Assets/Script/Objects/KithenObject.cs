@@ -20,7 +20,7 @@ public class KithenObject : MonoBehaviour
             Debug.LogError("KithenObjectParent already has object");
         }
 
-        this.kithenObjectParent.SetKithenObjectParent(this);
+        this.kithenObjectParent.SetKithenObject(this);
 
         transform.parent = this.kithenObjectParent.GetTopKithenPointFollowTransform();
         transform.localPosition = Vector3.zero;

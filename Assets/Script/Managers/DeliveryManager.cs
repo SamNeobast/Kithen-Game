@@ -6,6 +6,8 @@ public class DeliveryManager : MonoBehaviour
 {
     public event Action DeliverySpawned;
     public event Action DeliveryCompleted;
+    public event Action DeliveryFailed;
+    public event Action DeliverySucces;
 
     public static DeliveryManager Instance { get; private set; }
 
@@ -76,10 +78,14 @@ public class DeliveryManager : MonoBehaviour
                 {
                     waitinResipeSOList.RemoveAt(i);
                     DeliveryCompleted?.Invoke();
+                    DeliverySucces?.Invoke();
                     return;
                 }
             }
         }
+
+        //Player did not deliver a corect recipe
+        DeliveryFailed?.Invoke();
     }
 
 
