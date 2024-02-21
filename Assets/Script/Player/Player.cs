@@ -23,12 +23,12 @@ public class Player : MonoBehaviour, IKithenObjectParent
 
     private void OnEnable()
     {
-        gameInput.OnInteractActionE += OnInteractActions;
+        gameInput.OnInteractActionE += GameInput_OnInteractActions;
         gameInput.OnInteractActionF += GameInput_OnInteractActionAlternative;
     }
     private void OnDestroy()
     {
-        gameInput.OnInteractActionE -= OnInteractActions;
+        gameInput.OnInteractActionE -= GameInput_OnInteractActions;
         gameInput.OnInteractActionF -= GameInput_OnInteractActionAlternative;
     }
 
@@ -39,11 +39,15 @@ public class Player : MonoBehaviour, IKithenObjectParent
     }
     private void GameInput_OnInteractActionAlternative()
     {
+        if (!GameManager.Instance.IsGamePlaying()) return;
+
         selectedCounter?.InteractAlternative(this);
     }
 
-    private void OnInteractActions()
+    private void GameInput_OnInteractActions()
     {
+        if (!GameManager.Instance.IsGamePlaying()) return;
+
         selectedCounter?.Interact(this);
     }
 
