@@ -18,11 +18,12 @@ public class GameManager : MonoBehaviour
         GameOver,
     }
 
+    [SerializeField] private float timerGamePlayingMax = 180f;
+
     private State state;
     private float timerWaitingToStart = 1f;
     private float timerCountdownToStart = 3f;
     private float timerGamePlaying;
-    private float timerGamePlayingMax = 15f;
 
 
     private void Awake()
@@ -64,7 +65,6 @@ public class GameManager : MonoBehaviour
             case State.GameOver:
                 break;
         }
-        Debug.Log(state);
     }
 
     public bool IsGamePlaying()
