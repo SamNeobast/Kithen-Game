@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
@@ -13,9 +11,7 @@ public class GameStartCountdownUI : MonoBehaviour
         GameManager.Instance.OnStateChange += GameManager_OnStateChange;
 
         Hide();
-    }
-
-  
+    }  
 
     private void GameManager_OnStateChange()
     {
