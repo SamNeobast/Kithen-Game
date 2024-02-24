@@ -16,6 +16,8 @@ public class GameOverUI : MonoBehaviour
         Hide();
     }
 
+    
+
     private void GameManager_OnStateChange()
     {
         if (GameManager.Instance.IsGameOver())

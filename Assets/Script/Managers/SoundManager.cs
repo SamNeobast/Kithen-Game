@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor.ShaderGraph.Internal;
 using UnityEngine;
 
 public class SoundManager : MonoBehaviour
@@ -15,7 +12,7 @@ public class SoundManager : MonoBehaviour
         Instance = this;
     }
 
-    private void Start()
+    private void OnEnable()
     {
         DeliveryManager.Instance.DeliverySucces += DeliveryManager_DeliverySucces;
         DeliveryManager.Instance.DeliveryFailed += DeliveryManager_DeliveryFailed;
@@ -23,6 +20,16 @@ public class SoundManager : MonoBehaviour
         Player.OnPickedSomething += Player_OnPickedSomething;
         BaseCounter.OnAnyObjectPlacedHere += BaseCounter_OnAnyObjectPlacedHere;
         TrashCounter.OnAnyObjectTrashed += TrashCounter_OnAnyObjectTrashed;
+    }
+
+    private void OnDisable()
+    {
+        DeliveryManager.Instance.DeliverySucces -= DeliveryManager_DeliverySucces;
+        DeliveryManager.Instance.DeliveryFailed -= DeliveryManager_DeliveryFailed;
+        CuttingCounter.OnAnyCut -= CuttingCounter_OnAnyCut;
+        Player.OnPickedSomething -= Player_OnPickedSomething;
+        BaseCounter.OnAnyObjectPlacedHere -= BaseCounter_OnAnyObjectPlacedHere;
+        TrashCounter.OnAnyObjectTrashed -= TrashCounter_OnAnyObjectTrashed;
     }
 
     private void TrashCounter_OnAnyObjectTrashed(object obj)

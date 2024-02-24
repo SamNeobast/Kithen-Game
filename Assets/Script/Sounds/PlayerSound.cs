@@ -1,11 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerSound : MonoBehaviour
 {
-
-
     private Player player;
     private float footStepTimer;
     private float footStepTimerMax = 0.2f;

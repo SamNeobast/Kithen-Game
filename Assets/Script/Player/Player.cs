@@ -26,7 +26,7 @@ public class Player : MonoBehaviour, IKithenObjectParent
         gameInput.OnInteractActionE += GameInput_OnInteractActions;
         gameInput.OnInteractActionF += GameInput_OnInteractActionAlternative;
     }
-    private void OnDestroy()
+    private void OnDisable()
     {
         gameInput.OnInteractActionE -= GameInput_OnInteractActions;
         gameInput.OnInteractActionF -= GameInput_OnInteractActionAlternative;

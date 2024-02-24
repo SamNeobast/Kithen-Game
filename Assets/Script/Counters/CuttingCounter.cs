@@ -55,10 +55,11 @@ public class CuttingCounter : BaseCounter, IHasProgress
         if (HasKithenObject() && HasRecipeWithInput(GetKithenObject().GetKithenObjectSO()))
         {
             cuttingProgress++;
-            CuttingRecipeSO cuttingRecipeSO = GetCuttingRecipeSOWithInput(GetKithenObject().GetKithenObjectSO());
 
             OnCut?.Invoke();
             OnAnyCut?.Invoke(this);
+
+            CuttingRecipeSO cuttingRecipeSO = GetCuttingRecipeSOWithInput(GetKithenObject().GetKithenObjectSO());
             OnProgressChanged?.Invoke((float)cuttingProgress / cuttingRecipeSO.cuttingProgressCountMax);
 
             if (cuttingProgress >= cuttingRecipeSO.cuttingProgressCountMax)

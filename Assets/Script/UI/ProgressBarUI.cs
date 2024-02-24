@@ -13,7 +13,6 @@ public class ProgressBarUI : MonoBehaviour
         hasProgress = counterGameObject.GetComponent<IHasProgress>();
 
         hasProgress.OnProgressChanged += IHasProgress_OnProgressChanged;
-
         barImage.fillAmount = 0f;
 
         Hide();

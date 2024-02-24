@@ -15,16 +15,16 @@ public class PlateIconsUI : MonoBehaviour
     {
         plateKithenObject.OnIngredientAdded += PlateKithenObject_OnIngredientAdded;
     }
+    private void OnDisable()
+    {
+        plateKithenObject.OnIngredientAdded -= PlateKithenObject_OnIngredientAdded;
+    }
 
     private void PlateKithenObject_OnIngredientAdded(KithenObjectSO obj)
     {
         UpdateVisual();
     }
 
-    private void OnDisable()
-    {
-        plateKithenObject.OnIngredientAdded -= PlateKithenObject_OnIngredientAdded;
-    }
 
     private void UpdateVisual()
     {

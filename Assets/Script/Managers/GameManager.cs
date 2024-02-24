@@ -1,14 +1,14 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
+using System.Security.Cryptography;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-   
     public static GameManager Instance { get; private set; }
 
     public event Action OnStateChange;
+    public event Action OnGamePaused;
+    public event Action OnGameUnpaused;
 
     private enum State
     {
@@ -24,12 +24,27 @@ public class GameManager : MonoBehaviour
     private float timerWaitingToStart = 1f;
     private float timerCountdownToStart = 3f;
     private float timerGamePlaying;
-
+    private bool isGamePause = false;
 
     private void Awake()
     {
         Instance = this;
         state = State.WaitingToStart;
+    }
+
+    private void OnEnable()
+    {
+        GameInput.Instance.OnPauseAction += GameInput_OnPauseAction;
+    }
+
+
+    private void OnDisable()
+    {
+        GameInput.Instance.OnPauseAction -= GameInput_OnPauseAction;
+    }
+    private void GameInput_OnPauseAction()
+    {
+        PauseGame();
     }
 
     private void Update()
@@ -90,5 +105,21 @@ public class GameManager : MonoBehaviour
     public float GetTimerGamePlayingNormalized()
     {
         return 1 - (timerGamePlaying / timerGamePlayingMax);
+    }
+
+    public void PauseGame()
+    {
+        isGamePause = !isGamePause;
+
+        if (isGamePause)
+        {
+            Time.timeScale = 0f;
+            OnGamePaused?.Invoke();
+        }
+        else
+        {
+            Time.timeScale = 1f;
+            OnGameUnpaused?.Invoke();
+        }
     }
 }

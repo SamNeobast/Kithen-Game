@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class StoveCounterSound : MonoBehaviour
@@ -13,9 +11,14 @@ public class StoveCounterSound : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
     }
 
-    private void Start()
+    private void OnEnable()
     {
         stoveCounter.OnStateChanged += StoveCounter_OnStateChanged;
+    }
+
+    private void OnDisable()
+    {
+        stoveCounter.OnStateChanged -= StoveCounter_OnStateChanged;
     }
 
     private void StoveCounter_OnStateChanged()

@@ -9,10 +9,10 @@ public class SelectedCounterVisual : MonoBehaviour
     {
         Player.OnSelectedCounterChanged += SelectedCounter;
     }
-    private void OnDestroy()
+    private void OnDisable()
     {
 
-        Player.OnSelectedCounterChanged += SelectedCounter;
+        Player.OnSelectedCounterChanged -= SelectedCounter;
     }
 
     private void SelectedCounter(BaseCounter selectedCounter)
