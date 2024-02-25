@@ -37,7 +37,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": true
                 },
                 {
-                    ""name"": ""Interacts"",
+                    ""name"": ""Interact"",
                     ""type"": ""Button"",
                     ""id"": ""1d444b6f-1e7d-4040-bbcf-3cf4a3b4fa98"",
                     ""expectedControlType"": ""Button"",
@@ -182,7 +182,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Interacts"",
+                    ""action"": ""Interact"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -216,7 +216,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         // Player
         m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
         m_Player_Move = m_Player.FindAction("Move", throwIfNotFound: true);
-        m_Player_Interacts = m_Player.FindAction("Interacts", throwIfNotFound: true);
+        m_Player_Interact = m_Player.FindAction("Interact", throwIfNotFound: true);
         m_Player_InteractAlternative = m_Player.FindAction("InteractAlternative", throwIfNotFound: true);
         m_Player_Pause = m_Player.FindAction("Pause", throwIfNotFound: true);
     }
@@ -281,7 +281,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
     private readonly InputActionMap m_Player;
     private List<IPlayerActions> m_PlayerActionsCallbackInterfaces = new List<IPlayerActions>();
     private readonly InputAction m_Player_Move;
-    private readonly InputAction m_Player_Interacts;
+    private readonly InputAction m_Player_Interact;
     private readonly InputAction m_Player_InteractAlternative;
     private readonly InputAction m_Player_Pause;
     public struct PlayerActions
@@ -289,7 +289,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         private @PlayerInputActions m_Wrapper;
         public PlayerActions(@PlayerInputActions wrapper) { m_Wrapper = wrapper; }
         public InputAction @Move => m_Wrapper.m_Player_Move;
-        public InputAction @Interacts => m_Wrapper.m_Player_Interacts;
+        public InputAction @Interact => m_Wrapper.m_Player_Interact;
         public InputAction @InteractAlternative => m_Wrapper.m_Player_InteractAlternative;
         public InputAction @Pause => m_Wrapper.m_Player_Pause;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
@@ -304,9 +304,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @Move.started += instance.OnMove;
             @Move.performed += instance.OnMove;
             @Move.canceled += instance.OnMove;
-            @Interacts.started += instance.OnInteracts;
-            @Interacts.performed += instance.OnInteracts;
-            @Interacts.canceled += instance.OnInteracts;
+            @Interact.started += instance.OnInteract;
+            @Interact.performed += instance.OnInteract;
+            @Interact.canceled += instance.OnInteract;
             @InteractAlternative.started += instance.OnInteractAlternative;
             @InteractAlternative.performed += instance.OnInteractAlternative;
             @InteractAlternative.canceled += instance.OnInteractAlternative;
@@ -320,9 +320,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @Move.started -= instance.OnMove;
             @Move.performed -= instance.OnMove;
             @Move.canceled -= instance.OnMove;
-            @Interacts.started -= instance.OnInteracts;
-            @Interacts.performed -= instance.OnInteracts;
-            @Interacts.canceled -= instance.OnInteracts;
+            @Interact.started -= instance.OnInteract;
+            @Interact.performed -= instance.OnInteract;
+            @Interact.canceled -= instance.OnInteract;
             @InteractAlternative.started -= instance.OnInteractAlternative;
             @InteractAlternative.performed -= instance.OnInteractAlternative;
             @InteractAlternative.canceled -= instance.OnInteractAlternative;
@@ -349,7 +349,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
     public interface IPlayerActions
     {
         void OnMove(InputAction.CallbackContext context);
-        void OnInteracts(InputAction.CallbackContext context);
+        void OnInteract(InputAction.CallbackContext context);
         void OnInteractAlternative(InputAction.CallbackContext context);
         void OnPause(InputAction.CallbackContext context);
     }

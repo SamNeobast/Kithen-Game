@@ -15,7 +15,7 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "Interacts",
+                    "name": "Interact",
                     "type": "Button",
                     "id": "1d444b6f-1e7d-4040-bbcf-3cf4a3b4fa98",
                     "expectedControlType": "Button",
@@ -160,7 +160,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Interacts",
+                    "action": "Interact",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
