@@ -4,7 +4,6 @@ using UnityEngine.UI;
 
 public class OptionUI : MonoBehaviour
 {
-
     public static OptionUI Instance { get; private set; }
 
     [SerializeField] private Button soundEffectButton;
@@ -99,6 +98,7 @@ public class OptionUI : MonoBehaviour
     public void Show()
     {
         gameObject.SetActive(true);
+        soundEffectButton.Select();
     }
 
     private void Hide()

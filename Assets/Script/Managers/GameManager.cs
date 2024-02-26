@@ -21,7 +21,6 @@ public class GameManager : MonoBehaviour
     [SerializeField] private float timerGamePlayingMax = 180f;
 
     private State state;
-    private float timerWaitingToStart = 1f;
     private float timerCountdownToStart = 3f;
     private float timerGamePlaying;
     private bool isGamePause = false;
@@ -35,8 +34,17 @@ public class GameManager : MonoBehaviour
     private void OnEnable()
     {
         GameInput.Instance.OnPauseAction += GameInput_OnPauseAction;
+        GameInput.Instance.OnInteractActionE += GameInput_OnInteractActionE;
     }
 
+    private void GameInput_OnInteractActionE()
+    {
+        if (state == State.WaitingToStart)
+        {
+            state = State.CountdownToStart;
+            OnStateChange?.Invoke();
+        }
+    }
 
     private void OnDisable()
     {
@@ -52,12 +60,6 @@ public class GameManager : MonoBehaviour
         switch (state)
         {
             case State.WaitingToStart:
-                timerWaitingToStart -= Time.deltaTime;
-                if (timerWaitingToStart < 0f)
-                {
-                    state = State.CountdownToStart;
-                    OnStateChange?.Invoke();
-                }
                 break;
             case State.CountdownToStart:
                 timerCountdownToStart -= Time.deltaTime;
