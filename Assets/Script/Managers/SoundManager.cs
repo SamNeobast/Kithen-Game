@@ -10,7 +10,6 @@ public class SoundManager : MonoBehaviour
     [SerializeField] private AudioClipRefsSO audioClipRefsSO;
 
     
-
     private float volume = 0.5f;
 
     private void Awake()
@@ -22,8 +21,8 @@ public class SoundManager : MonoBehaviour
 
     private void OnEnable()
     {
-        DeliveryManager.Instance.DeliverySucces += DeliveryManager_DeliverySucces;
-        DeliveryManager.Instance.DeliveryFailed += DeliveryManager_DeliveryFailed;
+        DeliveryManager.Instance.OnDeliverySucces += DeliveryManager_DeliverySucces;
+        DeliveryManager.Instance.OnDeliveryFailed += DeliveryManager_DeliveryFailed;
         CuttingCounter.OnAnyCut += CuttingCounter_OnAnyCut;
         Player.OnPickedSomething += Player_OnPickedSomething;
         BaseCounter.OnAnyObjectPlacedHere += BaseCounter_OnAnyObjectPlacedHere;
@@ -32,8 +31,8 @@ public class SoundManager : MonoBehaviour
 
     private void OnDisable()
     {
-        DeliveryManager.Instance.DeliverySucces -= DeliveryManager_DeliverySucces;
-        DeliveryManager.Instance.DeliveryFailed -= DeliveryManager_DeliveryFailed;
+        DeliveryManager.Instance.OnDeliverySucces -= DeliveryManager_DeliverySucces;
+        DeliveryManager.Instance.OnDeliveryFailed -= DeliveryManager_DeliveryFailed;
         CuttingCounter.OnAnyCut -= CuttingCounter_OnAnyCut;
         Player.OnPickedSomething -= Player_OnPickedSomething;
         BaseCounter.OnAnyObjectPlacedHere -= BaseCounter_OnAnyObjectPlacedHere;
@@ -89,6 +88,15 @@ public class SoundManager : MonoBehaviour
     public void PlayFootStepsSound(Vector3 position, float volume)
     {
         PlaySound(audioClipRefsSO.footstep, position, volume);
+    }
+    public void PlayCountdownSound()
+    {
+        PlaySound(audioClipRefsSO.warning, Vector3.zero);
+    }
+
+    public void PlayWarningSound(Vector3 position)
+    {
+        PlaySound(audioClipRefsSO.warning, position);
     }
 
     public void ChangeVolume()

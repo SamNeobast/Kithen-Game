@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class DeliveryManager : MonoBehaviour
 {
-    public event Action DeliverySpawned;
-    public event Action DeliveryCompleted;
-    public event Action DeliveryFailed;
-    public event Action DeliverySucces;
+    public event Action OnDeliverySpawned;
+    public event Action OnDeliveryCompleted;
+    public event Action OnDeliveryFailed;
+    public event Action OnDeliverySucces;
 
     public static DeliveryManager Instance { get; private set; }
 
@@ -39,7 +39,7 @@ public class DeliveryManager : MonoBehaviour
                     [UnityEngine.Random.Range(0, recipeListSO.resipeSOList.Count)];
 
                 waitinResipeSOList.Add(waitingRecipeSO);
-                DeliverySpawned?.Invoke();
+                OnDeliverySpawned?.Invoke();
             }
         }
 
@@ -80,15 +80,15 @@ public class DeliveryManager : MonoBehaviour
                     countSuccessResipes++;
 
                     waitinResipeSOList.RemoveAt(i);
-                    DeliveryCompleted?.Invoke();
-                    DeliverySucces?.Invoke();
+                    OnDeliveryCompleted?.Invoke();
+                    OnDeliverySucces?.Invoke();
                     return;
                 }
             }
         }
 
         //Player did not deliver a corect recipe
-        DeliveryFailed?.Invoke();
+        OnDeliveryFailed?.Invoke();
     }
 
 

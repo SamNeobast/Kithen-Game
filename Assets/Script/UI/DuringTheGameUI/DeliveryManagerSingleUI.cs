@@ -33,7 +33,5 @@ public class DeliveryManagerSingleUI : MonoBehaviour
             iconTransform.gameObject.SetActive(true);
             iconTransform.GetComponent<Image>().sprite = kithenObjectSO.sprite;
         }
-
     }
-
 }

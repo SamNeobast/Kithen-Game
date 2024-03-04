@@ -14,16 +14,16 @@ public class DeliveryManagerUI : MonoBehaviour
 
     private void Start()
     {
-        DeliveryManager.Instance.DeliverySpawned += DeliveryManager_DeliverySpawned;
-        DeliveryManager.Instance.DeliveryCompleted += DeliveryManager_DeliveryCompleted;
+        DeliveryManager.Instance.OnDeliverySpawned += DeliveryManager_DeliverySpawned;
+        DeliveryManager.Instance.OnDeliveryCompleted += DeliveryManager_DeliveryCompleted;
 
         UpdateVisual();
     }
 
     private void OnDisable()
     {
-        DeliveryManager.Instance.DeliverySpawned -= DeliveryManager_DeliverySpawned;
-        DeliveryManager.Instance.DeliveryCompleted -= DeliveryManager_DeliveryCompleted;
+        DeliveryManager.Instance.OnDeliverySpawned -= DeliveryManager_DeliverySpawned;
+        DeliveryManager.Instance.OnDeliveryCompleted -= DeliveryManager_DeliveryCompleted;
     }
 
     private void DeliveryManager_DeliveryCompleted()
